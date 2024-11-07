@@ -1,5 +1,6 @@
 import './App.css';
 import MultiSelectChips from './components/MultiSelectChips';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (

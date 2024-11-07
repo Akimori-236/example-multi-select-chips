@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Button, ListGroup, ListGroupItem, Badge, Row, Col } from 'reactstrap';
 
 const MultiSelectChips = () => {
     // List of available labels
@@ -22,45 +23,57 @@ const MultiSelectChips = () => {
     };
 
     return (
-        <div className="multi-select-container">
+        <div className="container mt-5">
             {/* List of available labels */}
-            <div className="available-labels">
-                <h3>Select Labels:</h3>
-                <ul>
-                    {availableLabels.map((label) => (
-                        <li key={label}>
-                            <button
-                                className="select-button"
-                                onClick={() => handleAddLabel(label)}
-                            >
-                                {label}
-                            </button>
-                        </li>
-                    ))}
-                </ul>
-            </div>
+            <Row>
+                <Col>
+                    <h3>Select Labels:</h3>
+                    <ListGroup>
+                        {availableLabels.map((label) => (
+                            <ListGroupItem key={label} className="d-flex justify-content-between">
+                                <Button
+                                    color="primary"
+                                    size="sm"
+                                    onClick={() => handleAddLabel(label)}
+                                >
+                                    {label}
+                                </Button>
+                            </ListGroupItem>
+                        ))}
+                    </ListGroup>
+                </Col>
+            </Row>
 
             {/* Display selected labels as chips */}
-            <div className="selected-chips">
-                <h3>Selected Labels:</h3>
-                {selectedLabels.length > 0 ? (
-                    <div className="chips-container">
-                        {selectedLabels.map((label) => (
-                            <div key={label} className="chip">
-                                {label}
-                                <button
-                                    className="remove-chip"
-                                    onClick={() => handleRemoveLabel(label)}
+            <Row className="mt-4">
+                <Col>
+                    <h3>Selected Labels:</h3>
+                    {selectedLabels.length > 0 ? (
+                        <div className="d-flex flex-wrap">
+                            {selectedLabels.map((label) => (
+                                <Badge
+                                    key={label}
+                                    color="light"
+                                    pill
+                                    className="border border-dark text-dark me-2 mb-2 ps-3 d-flex align-items-center"
                                 >
-                                    ✖
-                                </button>
-                            </div>
-                        ))}
-                    </div>
-                ) : (
-                    <p>No labels selected</p>
-                )}
-            </div>
+                                    {label}
+                                    <Button
+                                        color="light"
+                                        size="sm"
+                                        className="ms-2 rounded-pill"
+                                        onClick={() => handleRemoveLabel(label)}
+                                    >
+                                        ❌
+                                    </Button>
+                                </Badge>
+                            ))}
+                        </div>
+                    ) : (
+                        <p>No labels selected</p>
+                    )}
+                </Col>
+            </Row>
         </div>
     );
 };
